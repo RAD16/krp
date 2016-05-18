@@ -7,8 +7,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/* fibindexl: return nth fibonacci number using a loop */
 int
-fibindex(int n)
+fibindexl(int n)
 {
 	int i = n;
 	int a, b, c;
@@ -27,13 +28,13 @@ fibindex(int n)
 	return a;
 }
 
+/* fibindexr: return the nth fibonacci number using tail recursion */
 int
 fibindexr(int n, int a, int b)
 {
 	int c;	
-	--n;
 	
-	if (n < 1)
+	if (--n < 1)
 		return a;
 	else {
 		c = a;
@@ -44,13 +45,31 @@ fibindexr(int n, int a, int b)
 	return fibindexr(n, a, b);
 }
 
-int
+/* runfib: print fibonacci numbers ad infinitum, or until computer breaks */
+void
 runfib(int n)
 {
 	int c = n;
 	int i = 1;
+	
 	while(c--) {	
-		printf("%d\t", fibindex(i++));
+		printf("%d\t", fibindexl(i++));
+	}
+	printf("\n");
+}
+
+/* fibrange: print fibonacci numbers less than or equan to n */
+void
+fibrange(int n)
+{
+	int c = n;
+	int i = 1;
+	
+	while(fibindexl(i++) <= n) {	
+		if (fibindexl(i) <= n)
+			printf("%d\t", fibindexl(i));
+		else
+			break;
 	}
 	printf("\n");
 }
@@ -58,16 +77,24 @@ runfib(int n)
 int
 main(int argc, char *argv[]) 
 {
+	int a, b, c;
 	int n = atoi(argv[1]);
-	int a, b = 0, c = 1;
 	
-	a = fibindexr(n, b, c);
-	printf("recursive - %d\n", a);
+	printf("Fibonacci Number %d:\n", n);
 	
+	/* Looping fibindex */
+	a = fibindexl(n);
+	printf("\t%d (looping)\n", a);
+	
+	/* Recursive fibindex */
 	b = 0, c = 1;
-	a = fibindex(n);
+	a = fibindexr(n, b, c);
+	printf("\t%d (recursive)\n", a);
 	
-	printf("loop - %d\n", a);
+	/* Print fib numbers <= n */
+	printf("Fibonacci Numbers under %d:\n", n);
+	n = atoi(argv[1]);
+	fibrange(n);
 	
 	return 0;
 }
