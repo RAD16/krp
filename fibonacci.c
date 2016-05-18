@@ -8,17 +8,20 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include "growarray.h"
 
 int
-fibcalc(int n)
+fibindex(int n)
 {
+	int i = n;
 	int a, b, c;
 	
 	a = 0;
 	b = 1;
 	
-	while(--n) {	
+	if (n < 1)
+		return a;
+	
+	while(--i) {	
 		c = a;
 		a += b;
 		b = c;
@@ -26,16 +29,47 @@ fibcalc(int n)
 	return a;
 }
 
+int
+fibindexr(int n, int a, int b)
+{
+	int c;	
+	--n;
+	
+	if (n < 1)
+		return a;
+	else {
+		c = a;
+		a += b;
+		b = c;
+	}
+		
+	return fibindexr(n, a, b);
+}
+
+int
+runfib(int n)
+{
+	int c = n;
+	int i = 1;
+	while(c--) {	
+		printf("%d\t", fibindex(i++));
+	}
+	printf("\n");
+}
 
 int
 main(int argc, char *argv[]) 
 {
 	int n = atoi(argv[1]);
-	int a;
-	a = fibcalc(n);
+	int a, b = 0, c = 1;
 	
-	printf("%d\n", a);
-		
-
+	a = fibindexr(n, b, c);
+	printf("recursive - %d\n", a);
+	
+	b = 0, c = 1;
+	a = fibindex(n);
+	
+	printf("loop - %d\n", a);
+	
 	return 0;
 }
