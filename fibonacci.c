@@ -32,9 +32,9 @@ fibindexl(int n)
 int
 fibindexr(int n, int a, int b)
 {
-	int c;	
+	int c, i = n;	
 	
-	if (--n < 1)
+	if (--i < 1)
 		return a;
 	else {
 		c = a;
@@ -42,7 +42,7 @@ fibindexr(int n, int a, int b)
 		b = c;
 	}
 		
-	return fibindexr(n, a, b);
+	return fibindexr(i, a, b);
 }
 
 /* runfib: print n fibonacci numbers */
