@@ -1,5 +1,5 @@
 /*
- *	Calculates the nth number of a fibonacci sequence
+ *	Functions pertaining to the fibonacci sequence,
  *	where each new number is the sum of the previous two
  *	i.e. 0,1,1,2,3,5,8,13,21,34...
  */
@@ -45,7 +45,7 @@ fibindexr(int n, int a, int b)
 	return fibindexr(n, a, b);
 }
 
-/* runfib: print fibonacci numbers ad infinitum, or until computer breaks */
+/* runfib: print n fibonacci numbers */
 void
 runfib(int n)
 {
@@ -63,7 +63,7 @@ void
 fibrange(int n)
 {
 	int c = n;
-	int i = 1;
+	int i = 0;
 	
 	while(fibindexl(i++) <= n) {	
 		if (fibindexl(i) <= n)
@@ -92,9 +92,12 @@ main(int argc, char *argv[])
 	printf("\t%d (recursive)\n", a);
 	
 	/* Print fib numbers <= n */
-	printf("Fibonacci Numbers under %d:\n", n);
-	n = atoi(argv[1]);
+	printf("Fibonacci Numbers <= %d:\n", n);
 	fibrange(n);
+	
+	/* Print n fib numbers */
+	printf("Printing %d Fibonacci Numbers\n", n);
+	runfib(n);
 	
 	return 0;
 }
