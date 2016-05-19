@@ -78,26 +78,46 @@ int
 main(int argc, char *argv[]) 
 {
 	int a, b, c;
-	int n = atoi(argv[1]);
+	int n = atoi(argv[2]);
+	char opt;
 	
-	printf("Fibonacci Number %d:\n", n);
+	if (argc == 1) {
+		puts("Enter option and number.");
+		return 0;
+	}
 	
-	/* Looping fibindex */
-	a = fibindexl(n);
-	printf("\t%d (looping)\n", a);
+	if (argv[1][0] == '-' && argv[1][1] && argv[2]) {
+		opt = argv[1][1];
+		switch(opt) {
 	
-	/* Recursive fibindex */
-	b = 0, c = 1;
-	a = fibindexr(n, b, c);
-	printf("\t%d (recursive)\n", a);
-	
-	/* Print fib numbers <= n */
-	printf("Fibonacci Numbers <= %d:\n", n);
-	fibrange(n);
-	
-	/* Print n fib numbers */
-	printf("Printing %d Fibonacci Numbers\n", n);
-	runfib(n);
-	
+		case 'l':
+			printf("Fibonacci Number %d:\n", n);
+			
+			/* Looping fibindex */
+			a = fibindexl(n);
+			printf("Fibonacci[%d]:\n", n);
+			printf("\t%d (looping)\n", a);
+			break;
+		case 'r':
+			/* Recursive fibindex */
+			b = 0, c = 1;
+			a = fibindexr(n, b, c);
+			printf("Fibonacci[%d]:\n", n);
+			printf("\t%d (recursive)\n", a);
+			break;
+		case 'a':
+			/* Print fib numbers <= n */
+			printf("Fibonacci Numbers <= %d:\n", n);
+			fibrange(n);
+			break;
+		case 'n':
+			/* Print n fib numbers */
+			printf("Printing %d Fibonacci Numbers\n", n);
+			runfib(n);
+			break;
+		}
+	} else 
+		puts("You're doing it wrong.");
+			
 	return 0;
 }
