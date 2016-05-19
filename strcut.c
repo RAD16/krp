@@ -4,10 +4,10 @@
  *
  * e.g. 
  * 	s[] = "foobar";
- * 	rd_array(s, 3);
+ * 	rd_strcut(s, 3);
  *	puts(s); // would print 'fooar', return 5. 
  *
- * 	rd_array(s, 7);
+ * 	rd_strcut(s, 7);
  *	puts(s); // would print 'foobar', return -1. 
  */
 
