@@ -17,22 +17,15 @@
 size_t 
 rd_strcut(char *s, const int index)
 {
-	char *sp, *osp;
-	size_t len;
+	char *sp = &s[index];
 	
-	if (s[index] != '\0' && index < strlen(s)) {
-		sp = osp = &s[index];
+	if (s[index] == '\0' || index > strlen(s))
+		return -1;
 		
-		while (*sp++)
-			;
-		len = sp - osp;
+	while (*sp++ = *sp)
+		;
 		
-		while (--len)
-			*osp++ = *osp;
-		
-		return (osp - s - 1);
-	}
-	return -1;
+	return (sp - s - 1);
 }
 
 /* ??? rd_strcutv: va_list to allow user to cut as many indices
@@ -54,6 +47,9 @@ main(int argc, char *argv[])
 	printf("\'%s\'\n", s);
 	nlen = rd_strcut(s, 2);
 	printf("\'%s\', nlen: %d\n", s, nlen);
+	
+	nlen = rd_strcut(s, -2);
+	printf("Neg index: \'%s\', nlen: %d\n", s, nlen);
 	
 	nlen = rd_strcut(t, 6);
 	printf("nlen: %d ; \'%s\'\n", nlen, t);
